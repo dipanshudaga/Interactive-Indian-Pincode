@@ -1,13 +1,6 @@
-<div align="center">
-  <h1 align="center">Interactive Indian Pincode Map</h1>
-  <p align="center">
-    A fluid visualization of India's postal network mapping 165,000+ pincodes.
-    <br />
-    <a href="https://dipanshudaga.github.io/Interactive-Indian-Pincode/"><strong>Check out the live map »</strong></a>
-  </p>
-</div>
+# Interactive Indian Pincode Map
 
-<br />
+Check out the live map here: [dipanshudaga.github.io/Interactive-Indian-Pincode](https://dipanshudaga.github.io/Interactive-Indian-Pincode/)
 
 This is an interactive visualization of India's postal network. It maps over 165,000 pincodes across the country, letting you explore the density and distribution of post offices in a fluid, responsive interface.
 
