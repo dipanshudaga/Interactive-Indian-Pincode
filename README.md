@@ -26,4 +26,4 @@ To keep things running fast in the browser, I did some basic cleanup:
 
 ## Running it locally
 1. Just clone the repo and open `index.html` in your browser. No server or dependencies needed.
-2. If you want to update the data, just put a new `pincodes.csv` in the folder and run `python3 update.py`.
+2. If you want to update the data, just put a new `clean_pincodes.csv` in the folder and run `python3 update.py`.

@@ -15,45 +15,22 @@
     <script src="data.js"></script>
     <style>
         :root {
-            /* --- FONTS & TYPOGRAPHY --- */
             --app-font: 'Outfit', system-ui, -apple-system, sans-serif;
-            /* Main elegant font used everywhere */
             --font-mono: 'JetBrains Mono', monospace;
-            /* Crisp font used for numbers and PIN codes */
-
-            /* TEXT SIZES (Change these to make text larger or smaller) */
             --fs-small: 10px;
-            /* Tiny: Used for small labels and metadata (like coordinates) */
             --fs-base: 12px;
-            /* Standard: Used for village lists and general text */
             --fs-medium: 15px;
-            /* Medium: Used for panel titles and search box text */
             --fs-large: 18px;
-            /* Large: Used for the big PIN code display in the scrubber */
-
-            /* FONT WEIGHTS (Change these to make text thinner or thicker) */
             --fw-light: 300;
-            /* Very Thin: Elegant look */
             --fw-regular: 400;
-            /* Normal: Standard readable thickness */
             --fw-medium: 500;
-            /* Medium: Slightly thicker for emphasis */
             --fw-semibold: 600;
-            /* Semi-Bold: Heavy emphasis */
             --fw-bold: 700;
-            /* Full Bold: Strongest headers and titles */
-
-            /* COLORS (Change these hex codes to change the site colors) */
             --color-main: #111;
-            /* Deep Black: strongest text for titles */
             --color-muted: #555;
-            /* Dark Grey: used for secondary descriptions */
             --color-dim: #999;
-            /* Light Grey: used for 'background' info like labels */
             --color-accent: #0066cc;
-            /* Bright Blue: accent color for buttons and focus */
             --color-bg-panel: rgba(255, 255, 255, 0.95);
-            /* White: background color for the boxes */
         }
 
         * {
@@ -97,7 +74,6 @@
         }
 
         #main-panel h1 {
-            /* --- TOP RIGHT MAIN TITLE --- */
             font-size: var(--fs-large);
             font-weight: var(--fw-bold);
             color: var(--color-main);
@@ -113,7 +89,6 @@
         }
 
         #legend-panel h2 {
-            /* --- TOP LEFT LEGEND TITLE --- */
             font-size: var(--fs-medium);
             font-weight: var(--fw-bold);
             color: var(--color-main);
@@ -123,7 +98,6 @@
         }
 
         #pinSearch {
-            /* --- THE PIN CODE SEARCH BOX --- */
             width: 100%;
             padding: 10px 14px;
             border-radius: 6px;
@@ -148,7 +122,6 @@
         }
 
         #searchResult {
-            /* --- STATUS TEXT (e.g. "Not Found" or "# results") --- */
             font-size: var(--fs-base);
             font-weight: var(--fw-medium);
             min-height: 16px;
@@ -159,7 +132,6 @@
         }
 
         #village-list {
-            /* --- THE SCROLLABLE BOX CONTAINING VILLAGE NAMES --- */
             max-height: 450px;
             overflow-y: auto;
             font-size: var(--fs-base);
@@ -178,7 +150,6 @@
         }
 
         .v-itm {
-            /* --- INDIVIDUAL VILLAGE/OFFICE NAME IN THE LIST --- */
             padding: 6px 0;
             color: var(--color-main);
             font-weight: var(--fw-medium);
@@ -186,7 +157,6 @@
         }
 
         .v-coords {
-            /* --- LATITUDE & LONGITUDE NUMBERS IN THE LIST --- */
             color: var(--color-dim);
             font-weight: var(--fw-regular);
             font-size: var(--fs-small);
@@ -211,7 +181,6 @@
         }
 
         .legend-item span {
-            /* --- LABELS FOR PIN ZONES (e.g. 1XXXXX: DL, HR...) --- */
             font-family: var(--font-mono);
             font-size: 11px
         }
@@ -240,7 +209,6 @@
         }
 
         .scrub-label {
-            /* --- LABEL ABOVE THE SLIDER ("Scrub through path") --- */
             font-size: var(--fs-base);
             font-weight: var(--fw-bold);
             color: var(--color-dim);
@@ -249,7 +217,6 @@
         }
 
         .scrub-value {
-            /* --- THE LARGE PIN CODE THAT CHANGES WHEN YOU SLIDE --- */
             font-size: var(--fs-large);
             color: var(--color-main);
             font-weight: var(--fw-bold);
@@ -274,7 +241,6 @@
         }
 
         .play-btn {
-            /* --- THE CLICKABLE PLAY / PAUSE BUTTON --- */
             padding: 6px 16px;
             background: rgba(0, 102, 204, .08);
             border: 1px solid rgba(0, 102, 204, .2);
@@ -301,7 +267,6 @@
         }
 
         #hover-info {
-            /* --- THE TOOLTIP BOX THAT FOLLOWS THE MOUSE CURSOR --- */
             position: fixed;
             bottom: 115px;
             left: 50%;
@@ -408,16 +373,13 @@
         for (let i = 0; i < N; i++) GRID[getG(FLAT[i * 2], FLAT[i * 2 + 1])].push(i);
         const COLORS = [[204, 0, 85], [204, 51, 0], [204, 119, 0], [184, 153, 0], [85, 168, 0], [0, 153, 102], [0, 136, 170], [17, 68, 204], [153, 34, 153]];
         function gcs(idx) { const p = zipAt(idx), d = parseInt(p[0] || '1') - 1, ci = Math.max(0, Math.min(8, d)); return COLORS[ci] }
-        let hI = -1, gR = 1000, sI = -1, playing = false, pT = null, needsDraw = true;
+        let hI = -1, gR = 1500, sI = -1, playing = false, pT = null, needsDraw = true;
         const map = L.map('map', {
             minZoom: 3,
             maxZoom: 18,
             zoomControl: false,
             attributionControl: false,
-            preferCanvas: true,
-            zoomSnap: 0.2,
-            zoomDelta: 0.2,
-            wheelPxPerZoomLevel: 100
+            preferCanvas: true
         });
         map.fitBounds([[6.5, 68], [37, 97.5]], { padding: [50, 50] });
         const CO = L.Layer.extend({
@@ -430,45 +392,130 @@
                 this._c.style.width = sz.x + 'px'; this._c.style.height = sz.y + 'px';
                 L.DomUtil.setPosition(this._c, m.containerPointToLayerPoint([0, 0]));
                 const x = this._x; x.setTransform(d, 0, 0, d, 0, 0); x.clearRect(0, 0, sz.x, sz.y);
-                const b = m.getBounds(), p = 2;
-                const nLa = b.getSouth() - p, xLa = b.getNorth() + p, nLo = b.getWest() - p, xLo = b.getEast() + p;
-                const z = m.getZoom(), lw = z < 6 ? .6 : z < 8 ? 1 : z < 10 ? 1.5 : 2, pr = z < 10 ? 1.5 : 2.5;
-                const fi = sI >= 0 ? sI : (hI >= 0 ? hI : -1), hf = fi >= 0, r = gR, ba = .5;
-                x.lineWidth = lw; x.lineJoin = 'round';
-                for (let i = 0; i < N - 1; i++) {
-                    const a0 = FLAT[i * 2], o0 = FLAT[i * 2 + 1], a1 = FLAT[(i + 1) * 2], o1 = FLAT[(i + 1) * 2 + 1];
-                    if (a0 < nLa || a0 > xLa || o0 < nLo || o0 > xLo) continue;
-                    if (ZIP_STR[i * 6] !== ZIP_STR[(i + 1) * 6]) continue;
-                    const da = Math.abs(a1 - a0), dl = Math.abs(o1 - o0);
-                    if (da > 1.5 || dl > 1.5) continue;
-                    const c = gcs(i), lj = da > 2 || dl > 2;
-                    let al;
-                    if (hf) { const df = i - fi, ad = Math.abs(df); if (df > 0) al = .03; else if (ad > r) al = .03; else { const t = 1 - ad / r; al = .03 + t * t * (lj ? .2 : .92) } }
-                    else al = lj ? ba * .15 : ba;
-                    if (al < .005) continue;
-                    if (hf) { const ad = Math.abs(i - fi); x.lineWidth = ad < r * .1 ? lw * 3.5 : ad < r * .3 ? lw * 1.8 : lw }
-                    const p0 = m.latLngToContainerPoint([a0, o0]), p1 = m.latLngToContainerPoint([a1, o1]);
-                    x.strokeStyle = `rgba(${c[0]},${c[1]},${c[2]},${al})`;
-                    x.beginPath(); x.moveTo(p0.x, p0.y); x.lineTo(p1.x, p1.y); x.stroke()
+                const b = m.getBounds();
+                const nLa = b.getSouth(), xLa = b.getNorth(), nLo = b.getWest(), xLo = b.getEast();
+                const z = m.getZoom(), lw = z < 6 ? .7 : z < 8 ? 1.2 : z < 10 ? 2 : 3, pr = z < 10 ? 1.5 : 2.5;
+                const fi = sI >= 0 ? sI : (hI >= 0 ? hI : -1), hf = fi >= 0, r = gR, ba = hf ? .15 : 1.0;
+
+                const ymin = Math.max(0, Math.floor((nLa - LAT_MIN) / (LAT_MAX - LAT_MIN) * G_RES) - 1);
+                const ymax = Math.min(G_RES - 1, Math.floor((xLa - LAT_MIN) / (LAT_MAX - LAT_MIN) * G_RES) + 1);
+                const xmin = Math.max(0, Math.floor((nLo - LON_MIN) / (LON_MAX - LON_MIN) * G_RES) - 1);
+                const xmax = Math.min(G_RES - 1, Math.floor((xLo - LON_MIN) / (LON_MAX - LON_MIN) * G_RES) + 1);
+
+                VISIBLE_FLAGS.fill(0);
+                for (let y = ymin; y <= ymax; y++) {
+                    for (let xx = xmin; xx <= xmax; xx++) {
+                        const cell = GRID[y * G_RES + xx];
+                        for (let j = 0; j < cell.length; j++) {
+                            const i = cell[j];
+                            const pp = m.latLngToContainerPoint([FLAT[i * 2], FLAT[i * 2 + 1]]);
+                            PROJECTED_XY[i * 2] = pp.x;
+                            PROJECTED_XY[i * 2 + 1] = pp.y;
+                            VISIBLE_FLAGS[i] = 1;
+                        }
+                    }
                 }
-                for (let i = 0; i < N; i++) {
-                    const la = FLAT[i * 2], lo = FLAT[i * 2 + 1];
-                    if (la < nLa || la > xLa || lo < nLo || lo > xLo) continue;
-                    let al, rr;
-                    if (hf) { const df = i - fi, ad = Math.abs(df); if (df > 0) { al = .06; rr = pr * .3 } else if (ad > r) { al = .06; rr = pr * .3 } else { const t = 1 - ad / r; al = .06 + t * t * .9; rr = pr * (.3 + t * 1.2) } }
-                    else { al = .85; rr = pr }
-                    if (al < .01) continue;
-                    const pp = m.latLngToContainerPoint([la, lo]), c = gcs(i);
-                    x.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${al})`;
-                    x.beginPath(); x.arc(pp.x, pp.y, rr, 0, Math.PI * 2); x.fill();
-                    if (z > 10) { x.strokeStyle = 'rgba(255,255,255,0.4)'; x.lineWidth = 0.5; x.stroke() }
-                    if (hf && i === fi) {
-                        const z = zipAt(i), children = PIN_OFFICES[z] || [];
-                        x.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},0.9)`;
-                        for (let j = 0; j < children.length; j++) {
-                            const cpp = m.latLngToContainerPoint([children[j][0], children[j][1]]);
-                            x.beginPath(); x.arc(cpp.x, cpp.y, 3.5, 0, Math.PI * 2); x.fill();
-                            x.strokeStyle = 'white'; x.lineWidth = 1; x.stroke();
+
+                x.lineWidth = lw; x.lineJoin = 'round';
+
+                for (let zIndexLoop = 0; zIndexLoop < 9; zIndexLoop++) {
+                    const c = COLORS[zIndexLoop];
+                    x.strokeStyle = `rgba(${c[0]},${c[1]},${c[2]},${ba})`;
+                    x.beginPath();
+                    let hasPath = false;
+                    for (let y = ymin; y <= ymax; y++) {
+                        for (let xx = xmin; xx <= xmax; xx++) {
+                            const cell = GRID[y * G_RES + xx];
+                            for (let j = 0; j < cell.length; j++) {
+                                const i = cell[j];
+                                if (i >= N - 1 || VISIBLE_FLAGS[i + 1] === 0) continue;
+                                const zi = Math.max(0, Math.min(8, parseInt(zipAt(i)[0] || '1') - 1));
+                                if (zi !== zIndexLoop) continue;
+
+                                if (hf && Math.abs(i - fi) <= r) continue;
+
+                                x.moveTo(PROJECTED_XY[i * 2], PROJECTED_XY[i * 2 + 1]);
+                                x.lineTo(PROJECTED_XY[(i + 1) * 2], PROJECTED_XY[(i + 1) * 2 + 1]);
+                                hasPath = true;
+                            }
+                        }
+                    }
+                    if (hasPath) x.stroke();
+
+                    if (hf) {
+                        for (let y = ymin; y <= ymax; y++) {
+                            for (let xx = xmin; xx <= xmax; xx++) {
+                                const cell = GRID[y * G_RES + xx];
+                                for (let j = 0; j < cell.length; j++) {
+                                    const i = cell[j];
+                                    if (i >= N - 1 || VISIBLE_FLAGS[i + 1] === 0) continue;
+                                    const zi = Math.max(0, Math.min(8, parseInt(zipAt(i)[0] || '1') - 1));
+                                    if (zi !== zIndexLoop) continue;
+                                    const df = i - fi, ad = Math.abs(df);
+                                    if (ad <= r) {
+                                        const t = 1 - ad / r, al = .05 + t * t * .95;
+                                        x.strokeStyle = `rgba(${c[0]},${c[1]},${c[2]},${al})`;
+                                        x.lineWidth = ad < r * .1 ? lw * 4 : ad < r * .3 ? lw * 2 : lw;
+                                        x.beginPath();
+                                        x.moveTo(PROJECTED_XY[i * 2], PROJECTED_XY[i * 2 + 1]);
+                                        x.lineTo(PROJECTED_XY[(i + 1) * 2], PROJECTED_XY[(i + 1) * 2 + 1]);
+                                        x.stroke();
+                                    }
+                                }
+                            }
+                        }
+                        x.lineWidth = lw;
+                    }
+                }
+
+                for (let zIndexLoop = 0; zIndexLoop < 9; zIndexLoop++) {
+                    const c = COLORS[zIndexLoop];
+                    x.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${ba})`;
+                    x.beginPath();
+                    let hasDots = false;
+                    for (let y = ymin; y <= ymax; y++) {
+                        for (let xx = xmin; xx <= xmax; xx++) {
+                            const cell = GRID[y * G_RES + xx];
+                            for (let j = 0; j < cell.length; j++) {
+                                const i = cell[j];
+                                const zi = Math.max(0, Math.min(8, parseInt(zipAt(i)[0] || '1') - 1));
+                                if (zi !== zIndexLoop) continue;
+                                if (hf && Math.abs(i - fi) <= r) continue;
+                                const px = PROJECTED_XY[i * 2], py = PROJECTED_XY[i * 2 + 1];
+                                x.moveTo(px + pr, py);
+                                x.arc(px, py, pr, 0, Math.PI * 2);
+                                hasDots = true;
+                            }
+                        }
+                    }
+                    if (hasDots) x.fill();
+
+                    if (hf) {
+                        for (let y = ymin; y <= ymax; y++) {
+                            for (let xx = xmin; xx <= xmax; xx++) {
+                                const cell = GRID[y * G_RES + xx];
+                                for (let j = 0; j < cell.length; j++) {
+                                    const i = cell[j];
+                                    const zi = Math.max(0, Math.min(8, parseInt(zipAt(i)[0] || '1') - 1));
+                                    if (zi !== zIndexLoop) continue;
+                                    const df = i - fi, ad = Math.abs(df);
+                                    if (ad <= r) {
+                                        const t = 1 - ad / r, al = .06 + t * t * .9, rr = pr * (.3 + t * 1.2);
+                                        const px = PROJECTED_XY[i * 2], py = PROJECTED_XY[i * 2 + 1];
+                                        x.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${al})`;
+                                        x.beginPath(); x.arc(px, py, rr, 0, Math.PI * 2); x.fill();
+                                        if (i === fi) {
+                                            const zStr = zipAt(i), ch = PIN_OFFICES[zStr] || [];
+                                            x.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},0.9)`;
+                                            for (let l = 0; l < ch.length; l++) {
+                                                const cp = m.latLngToContainerPoint([ch[l][0], ch[l][1]]);
+                                                x.beginPath(); x.arc(cp.x, cp.y, 3.5, 0, Math.PI * 2); x.fill();
+                                                x.strokeStyle = 'white'; x.lineWidth = 1; x.stroke();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -479,9 +526,13 @@
                     x.fillStyle = `rgb(${c[0]},${c[1]},${c[2]})`; x.fill();
                 }
                 needsDraw = false;
-            }, rr() { needsDraw = true; requestAnimationFrame(() => this._r()) }
+            },
+            rr() { needsDraw = true; requestAnimationFrame(() => this._r()) }
         });
         const ov = new CO(); ov.addTo(map);
+        const PROJECTED_XY = new Float64Array(N * 2);
+        const VISIBLE_FLAGS = new Uint8Array(N);
+
         const zS = document.getElementById('pinSearch'), sR = document.getElementById('searchResult'), vL = document.getElementById('village-list');
         zS.addEventListener('input', () => {
             const v = zS.value.trim();
@@ -515,11 +566,9 @@
         function togglePlay() {
             const b = document.getElementById('playBtn'); if (playing) { playing = false; clearInterval(pT); b.textContent = '\u25B6 Play'; b.classList.remove('active') } else {
                 playing = true; b.innerHTML = '\u23F8 Pause'; b.classList.add('active'); if (sI < 0) sI = 0; pT = setInterval(() => {
-                    /* --- PLAYBACK SPEED SETTINGS --- */
-                    sI += 100;   /* JUMP SIZE: Increase this (e.g. 500) to go faster, decrease (e.g. 50) to see more detail */
-
+                    sI += 150;
                     if (sI >= N) sI = 0; ss.value = sI; hI = sI; uSD(sI); const z = zipAt(sI); zS.value = z; sR.innerHTML = '#' + (sI + 1).toLocaleString() + ' of ' + N.toLocaleString() + ' &mdash; ' + PIN_OFFICES[z].length + ' locations'; ov.rr()
-                }, 50)           /* UPDATE RATE: Decrease this (e.g. 20) for smoother/faster, increase (e.g. 100) for slower */
+                }, 35)
             }
         }
         const hE = document.getElementById('hover-info');

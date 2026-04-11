@@ -3,7 +3,7 @@ import struct
 import base64
 import json
 
-CSV_PATH = "pincodes.csv"
+CSV_PATH = "clean_pincodes.csv"
 DATA_PATH = "data.js"
 
 LAT_MIN, LAT_MAX = 6.0, 37.0
@@ -50,7 +50,7 @@ def write_data_js(pin_str, coord_b64, N, pin_offices):
         "COORD_B64": coord_b64,
         "ZIP_STR": pin_str,
         "N": N,
-        "BOUNDS": {"LAT_MIN": LAT_MIN, "LAT_MAX": LAT_MAX, "LON_MIN": LON_MIN, "MAX_LON": LON_MAX},
+        "BOUNDS": {"LAT_MIN": LAT_MIN, "LAT_MAX": LAT_MAX, "LON_MIN": LON_MIN, "LON_MAX": LON_MAX},
         "PIN_OFFICES": pin_offices
     }
     with open(DATA_PATH, 'w', encoding='utf-8') as f:
