@@ -21,3 +21,12 @@ To keep things running fast in the browser, I did some basic cleanup:
 ## Running it locally
 1. Just clone the repo and open `index.html` in your browser. No server or dependencies needed.
 2. If you want to update the data, just put a new `pincodes.csv` in the folder and run `python3 update.py`.
+
+## Credits & Inspiration
+This project was inspired by a [tweet](https://x.com/noahlt/status/2037967021078630910) and [Claude artifact](https://claude.ai/public/artifacts/b9d09511-51b6-4c3a-a9bb-a17976a97c1e) created by [Noah (@noahlt)](https://x.com/noahlt). 
+
+While the original concept visualized zip paths, this version is adapted specifically for the **Indian context**:
+- **Scale**: Handles 19,565 unique pincodes (covering over 165,000 post office locations).
+- **Postal Zones**: Implements the logic and visualization for India's 9 postal zones.
+- **Performance**: Optimized for the high density of India's postal network using binary packing and canvas rendering to keep it fluid even on lower-end devices.
+
