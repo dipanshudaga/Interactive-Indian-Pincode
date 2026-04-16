@@ -298,6 +298,8 @@
             transition: all .2s;
             display: flex;
             align-items: center;
+            justify-content: center;
+            width: 90px;
             gap: 6px
         }
 
@@ -363,7 +365,7 @@
             .scrub-header { margin-bottom: 4px; }
             .scrub-label { font-size: 10px; }
             .scrub-value { font-size: 14px; }
-            .play-btn { padding: 3px 8px; font-size: 10px; }
+            .play-btn { padding: 3px 8px; font-size: 10px; width: 70px; }
             #scrubSlider { margin: 4px 0; height: 4px; }
             #scrubInfo { margin-top: 2px; font-size: 8px; }
             #hover-info { width: max-content; max-width: calc(100vw - 60px); font-size: 10px; padding: 6px 12px; text-align: center; bottom: 70px; line-height: 1.4; }
@@ -575,8 +577,8 @@
         }
         ss.addEventListener('input', () => { const i = parseInt(ss.value); sI = i; hI = i; uSD(i); const z = zipAt(i); zS.value = z; sR.innerHTML = '#' + (i + 1).toLocaleString() + ' of ' + N.toLocaleString() + ' &mdash; ' + PIN_OFFICES[z].length + ' locations'; ov.rr() });
         function togglePlay() {
-            const b = document.getElementById('playBtn'); if (playing) { playing = false; clearInterval(pT); b.textContent = '\u25B6 Play'; b.classList.remove('active') } else {
-                playing = true; b.innerHTML = '\u23F8 Pause'; b.classList.add('active'); if (sI < 0) sI = 0; pT = setInterval(() => {
+            const b = document.getElementById('playBtn'); if (playing) { playing = false; clearInterval(pT); b.innerHTML = '&#9654; Play'; b.classList.remove('active') } else {
+                playing = true; b.innerHTML = '&#10074;&#10074; Pause'; b.classList.add('active'); if (sI < 0) sI = 0; pT = setInterval(() => {
                     sI += 40;
                     if (sI >= N) sI = 0; ss.value = sI; hI = sI; uSD(sI); const z = zipAt(sI); zS.value = z; sR.innerHTML = '#' + (sI + 1).toLocaleString() + ' of ' + N.toLocaleString() + ' &mdash; ' + PIN_OFFICES[z].length + ' locations'; ov.rr()
                 }, 80)
