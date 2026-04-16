@@ -418,7 +418,7 @@
         <div class="scrub-header">
             <span class="scrub-label">Scrub through path</span>
             <div style="display:flex;gap:6px;align-items:center">
-                <button class="play-btn" id="playBtn" onclick="togglePlay()"><svg width="9" height="11" viewBox="0 0 9 11" fill="currentColor" style="vertical-align:-1px; margin-right:1px"><path d="M0 0l9 5.5L0 11z"/></svg> Play</button>
+                <button class="play-btn" id="playBtn" onclick="togglePlay()"><svg width="0.75em" height="0.9em" viewBox="0 0 9 11" fill="currentColor" style="vertical-align:-0.1em; margin-right:0.2em"><path d="M0 0l9 5.5L0 11z"/></svg> Play</button>
                 <span class="scrub-value" id="scrubValue">&mdash;</span>
             </div>
         </div>
@@ -576,8 +576,8 @@
             vL.innerHTML = h;
         }
         ss.addEventListener('input', () => { const i = parseInt(ss.value); sI = i; hI = i; uSD(i); const z = zipAt(i); zS.value = z; sR.innerHTML = '#' + (i + 1).toLocaleString() + ' of ' + N.toLocaleString() + ' &mdash; ' + PIN_OFFICES[z].length + ' locations'; ov.rr() });
-        const icnPlay = '<svg width="9" height="11" viewBox="0 0 9 11" fill="currentColor" style="vertical-align:-1px; margin-right:1px"><path d="M0 0l9 5.5L0 11z"/></svg>';
-        const icnPause = '<svg width="9" height="11" viewBox="0 0 9 11" fill="currentColor" style="vertical-align:-1px; margin-right:1px"><path d="M0 0h3v11H0zM6 0h3v11H6z"/></svg>';
+        const icnPlay = '<svg width="0.75em" height="0.9em" viewBox="0 0 9 11" fill="currentColor" style="vertical-align:-0.1em; margin-right:0.2em"><path d="M0 0l9 5.5L0 11z"/></svg>';
+        const icnPause = '<svg width="0.75em" height="0.9em" viewBox="0 0 9 11" fill="currentColor" style="vertical-align:-0.1em; margin-right:0.2em"><path d="M0 0h3v11H0zM6 0h3v11H6z"/></svg>';
         function togglePlay() {
             const b = document.getElementById('playBtn'); if (playing) { playing = false; clearInterval(pT); b.innerHTML = icnPlay + ' Play'; b.classList.remove('active') } else {
                 playing = true; b.innerHTML = icnPause + ' Pause'; b.classList.add('active'); if (sI < 0) sI = 0; pT = setInterval(() => {
