@@ -418,7 +418,7 @@
         <div class="scrub-header">
             <span class="scrub-label">Scrub through path</span>
             <div style="display:flex;gap:6px;align-items:center">
-                <button class="play-btn" id="playBtn" onclick="togglePlay()">&#9654; Play</button>
+                <button class="play-btn" id="playBtn" onclick="togglePlay()"><svg width="9" height="11" viewBox="0 0 9 11" fill="currentColor" style="vertical-align:-1px; margin-right:1px"><path d="M0 0l9 5.5L0 11z"/></svg> Play</button>
                 <span class="scrub-value" id="scrubValue">&mdash;</span>
             </div>
         </div>
@@ -576,9 +576,11 @@
             vL.innerHTML = h;
         }
         ss.addEventListener('input', () => { const i = parseInt(ss.value); sI = i; hI = i; uSD(i); const z = zipAt(i); zS.value = z; sR.innerHTML = '#' + (i + 1).toLocaleString() + ' of ' + N.toLocaleString() + ' &mdash; ' + PIN_OFFICES[z].length + ' locations'; ov.rr() });
+        const icnPlay = '<svg width="9" height="11" viewBox="0 0 9 11" fill="currentColor" style="vertical-align:-1px; margin-right:1px"><path d="M0 0l9 5.5L0 11z"/></svg>';
+        const icnPause = '<svg width="9" height="11" viewBox="0 0 9 11" fill="currentColor" style="vertical-align:-1px; margin-right:1px"><path d="M0 0h3v11H0zM6 0h3v11H6z"/></svg>';
         function togglePlay() {
-            const b = document.getElementById('playBtn'); if (playing) { playing = false; clearInterval(pT); b.innerHTML = '&#9654; Play'; b.classList.remove('active') } else {
-                playing = true; b.innerHTML = '&#10074;&#10074; Pause'; b.classList.add('active'); if (sI < 0) sI = 0; pT = setInterval(() => {
+            const b = document.getElementById('playBtn'); if (playing) { playing = false; clearInterval(pT); b.innerHTML = icnPlay + ' Play'; b.classList.remove('active') } else {
+                playing = true; b.innerHTML = icnPause + ' Pause'; b.classList.add('active'); if (sI < 0) sI = 0; pT = setInterval(() => {
                     sI += 40;
                     if (sI >= N) sI = 0; ss.value = sI; hI = sI; uSD(sI); const z = zipAt(sI); zS.value = z; sR.innerHTML = '#' + (sI + 1).toLocaleString() + ' of ' + N.toLocaleString() + ' &mdash; ' + PIN_OFFICES[z].length + ' locations'; ov.rr()
                 }, 80)
@@ -639,6 +641,13 @@
                 }
             }
         }
+
+        // Forcefully block pinch-to-zoom on iOS when touching UI panels
+        document.addEventListener('touchmove', function(event) {
+            if (event.touches.length > 1 && !event.target.closest('#map')) {
+                event.preventDefault();
+            }
+        }, { passive: false });
     </script>
 </body>
 
