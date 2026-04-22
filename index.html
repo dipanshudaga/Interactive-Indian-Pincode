@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <meta http-equiv="Content-Language" content="en">
     <title>Interactive Indian Pincode Map</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -340,35 +342,168 @@
             opacity: 1
         }
 
+        #credit-panel {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            font-size: var(--fs-base);
+            color: var(--color-main);
+            text-align: left;
+            font-family: var(--app-font);
+            opacity: 0.8;
+        }
+
+        #credit-panel a {
+            color: inherit;
+            text-decoration: underline;
+            font-weight: var(--fw-regular);
+        }
+
+        #credit-panel a:hover {
+            color: var(--color-accent);
+        }
+
         @media (max-width: 640px) {
-            #legend-panel { display: none; }
-            .legend-grid { grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 10px; }
-            .legend-item { gap: 4px; align-items: flex-start; }
-            .legend-item span { font-size: 8px; white-space: normal; width: auto; overflow: visible; display: inline; line-height: 1.2; }
-            details summary { font-size: 11px; font-weight: var(--fw-medium); margin-bottom: 8px; cursor: pointer; outline: none; list-style: none; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 6px; }
-            details summary::-webkit-details-marker { display: none; }
-            details summary::after { content: '\25BC'; font-size: 9px; color: var(--color-dim); float: right; margin-top: 2px; }
-            details[open] summary::after { content: '\25B2'; }
-            details[open] summary { margin-bottom: 10px; }
-            
+            #legend-panel {
+                display: none;
+            }
+
+            .legend-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 4px;
+                margin-bottom: 10px;
+            }
+
+            .legend-item {
+                gap: 4px;
+                align-items: flex-start;
+            }
+
+            .legend-item span {
+                font-size: 8px;
+                white-space: normal;
+                width: auto;
+                overflow: visible;
+                display: inline;
+                line-height: 1.2;
+            }
+
+            details summary {
+                font-size: 11px;
+                font-weight: var(--fw-medium);
+                margin-bottom: 8px;
+                cursor: pointer;
+                outline: none;
+                list-style: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+                padding-bottom: 6px;
+            }
+
+            details summary::-webkit-details-marker {
+                display: none;
+            }
+
+            details summary::after {
+                content: '\25BC';
+                font-size: 9px;
+                color: var(--color-dim);
+                float: right;
+                margin-top: 2px;
+            }
+
+            details[open] summary::after {
+                content: '\25B2';
+            }
+
+            details[open] summary {
+                margin-bottom: 10px;
+            }
+
             #main-panel {
-                top: 10px; right: auto; left: 50%; transform: translateX(-50%); width: calc(100vw - 60px);
+                top: 10px;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100vw - 60px);
                 padding: 10px 12px;
             }
-            #main-panel h1 { font-size: 13px; margin-bottom: 6px; letter-spacing: 0.5px; }
-            #pinSearch { padding: 6px 8px; margin-bottom: 6px; font-size: 13px; }
-            #searchResult { font-size: 10px; margin-bottom: 4px; }
-            #village-list { max-height: 65px; margin-top: 4px; padding-top: 4px; padding-right: 4px; }
-            .v-itm { padding: 3px 0; font-size: 11px; }
-            .v-coords { font-size: 8px; }
-            #scrubber-panel { bottom: 10px; left: 50%; transform: translateX(-50%); padding: 8px 12px; width: calc(100vw - 60px); }
-            .scrub-header { margin-bottom: 4px; }
-            .scrub-label { font-size: 10px; }
-            .scrub-value { font-size: 14px; }
-            .play-btn { padding: 3px 8px; font-size: 10px; width: 70px; }
-            #scrubSlider { margin: 4px 0; height: 4px; }
-            #scrubInfo { margin-top: 2px; font-size: 8px; }
-            #hover-info { width: max-content; max-width: calc(100vw - 60px); font-size: 10px; padding: 6px 12px; text-align: center; bottom: 70px; line-height: 1.4; }
+
+            #main-panel h1 {
+                font-size: 13px;
+                margin-bottom: 6px;
+                letter-spacing: 0.5px;
+            }
+
+            #pinSearch {
+                padding: 6px 8px;
+                margin-bottom: 6px;
+                font-size: 13px;
+            }
+
+            #searchResult {
+                font-size: 10px;
+                margin-bottom: 4px;
+            }
+
+            #village-list {
+                max-height: 65px;
+                margin-top: 4px;
+                padding-top: 4px;
+                padding-right: 4px;
+            }
+
+            .v-itm {
+                padding: 3px 0;
+                font-size: 11px;
+            }
+
+            .v-coords {
+                font-size: 8px;
+            }
+
+            #scrubber-panel {
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 8px 12px;
+                width: calc(100vw - 60px);
+            }
+
+            .scrub-header {
+                margin-bottom: 4px;
+            }
+
+            .scrub-label {
+                font-size: 10px;
+            }
+
+            .scrub-value {
+                font-size: 14px;
+            }
+
+            .play-btn {
+                padding: 3px 8px;
+                font-size: 10px;
+                width: 70px;
+            }
+
+            #scrubSlider {
+                margin: 4px 0;
+                height: 4px;
+            }
+
+            #scrubInfo {
+                margin-top: 2px;
+                font-size: 8px;
+            }
+
+            #hover-info {
+                display: none !important;
+            }
+
+            #credit-panel {
+                font-size: 8px;
+            }
         }
     </style>
 </head>
@@ -413,19 +548,25 @@
         <input type="text" id="pinSearch" placeholder="Search PIN code" maxlength="6" autocomplete="off">
         <div id="searchResult"></div>
         <div id="village-list"></div>
+        <div id="credit-panel">
+            Remix of <a href="https://claude.ai/public/artifacts/b9d09511-51b6-4c3a-a9bb-a17976a97c1e" target="_blank">US Version</a> by <a href="https://x.com/noahlt" target="_blank">@noahlt</a>
+        </div>
     </div>
     <div id="scrubber-panel" class="panel">
         <div class="scrub-header">
             <span class="scrub-label">Scrub through path</span>
             <div style="display:flex;gap:6px;align-items:center">
-                <button class="play-btn" id="playBtn" onclick="togglePlay()"><svg width="0.75em" height="0.9em" viewBox="0 0 9 11" fill="currentColor" style="vertical-align:-0.1em; margin-right:0.2em"><path d="M0 0l9 5.5L0 11z"/></svg> Play</button>
+                <button class="play-btn" id="playBtn" onclick="togglePlay()"><svg width="0.75em" height="0.9em"
+                        viewBox="0 0 9 11" fill="currentColor" style="vertical-align:-0.1em; margin-right:0.2em">
+                        <path d="M0 0l9 5.5L0 11z" />
+                    </svg> Play</button>
                 <span class="scrub-value" id="scrubValue">&mdash;</span>
             </div>
         </div>
         <input type="range" id="scrubSlider" min="0" value="0">
         <div id="scrubInfo"><span id="first_pin"></span><span id="scrubCenter"></span><span id="last_pin"></span></div>
     </div>
-    <div id="hover-info"></div>
+
     <script>
         const { COORD_B64, ZIP_STR, N, BOUNDS, PIN_OFFICES } = MAP_DATA;
         const { LAT_MIN, LAT_MAX, LON_MIN, LON_MAX } = BOUNDS;
@@ -588,6 +729,7 @@
         }
         const hE = document.getElementById('hover-info');
         map.on('mousemove', function (e) {
+            if (window.innerWidth <= 640) return;
             const z = map.getZoom(), mx = 50 / Math.pow(2, z), la = e.latlng.lat, lo = e.latlng.lng;
             let bi = -1, bd = Infinity;
             const g = getG(la, lo);
@@ -630,7 +772,7 @@
             const lgPanel = document.getElementById('legend-panel');
             const mainPanel = document.getElementById('main-panel');
             const searchBox = document.getElementById('pinSearch');
-            
+
             if (lgPanel && mainPanel && searchBox) {
                 const grid = lgPanel.querySelector('.legend-grid');
                 if (grid) {
@@ -643,7 +785,7 @@
         }
 
         // Forcefully block pinch-to-zoom on iOS when touching UI panels
-        document.addEventListener('touchmove', function(event) {
+        document.addEventListener('touchmove', function (event) {
             if (event.touches.length > 1 && !event.target.closest('#map')) {
                 event.preventDefault();
             }

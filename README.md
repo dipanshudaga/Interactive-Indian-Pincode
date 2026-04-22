@@ -20,7 +20,7 @@ Unlike the US system, many Indian pincodes cover several different villages or p
 The data comes from the [All India Pincode Directory](https://www.data.gov.in/catalog/all-india-pincode-directory-through-webservice).
 
 To keep things running fast in the browser, I did some basic cleanup:
-- Grouped post offices by pincode and averaged their coordinates for a cleaner map.
+- Grouped post offices by pincode and calculated their centroid (average of all coordinates) for a cleaner, accurate map representation.
 - Compressed the coordinate data into a small binary format so the page loads quickly.
 - Cleaned up names and removed any broken entries.
 
