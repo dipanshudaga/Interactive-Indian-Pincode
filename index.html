@@ -648,7 +648,7 @@
                     if (da > 1.5 || dl > 1.5) continue;
                     const c = gcs(i), lj = da > 2 || dl > 2;
                     let al;
-                    if (hf) { const df = i - fi, ad = Math.abs(df); if (df > 0) al = .03; else if (ad > r) al = .03; else { const t = 1 - ad / r; al = .03 + t * t * (lj ? .2 : .92) } }
+                    if (hf) { const df = i - fi, ad = Math.abs(df); if (df > 0) al = .08; else if (ad > r) al = .08; else { const t = 1 - ad / r; al = .08 + t * t * (lj ? .2 : .87) } }
                     else al = lj ? ba * .15 : ba;
                     if (al < .005) continue;
                     if (hf) { const ad = Math.abs(i - fi); x.lineWidth = ad < r * .1 ? lw * 3.5 : ad < r * .3 ? lw * 1.8 : lw }
@@ -658,7 +658,7 @@
                 for (let i = 0; i < N; i++) {
                     if (!_vis[i]) continue;
                     let al, rr;
-                    if (hf) { const df = i - fi, ad = Math.abs(df); if (df > 0) { al = .06; rr = pr * .3 } else if (ad > r) { al = .06; rr = pr * .3 } else { const t = 1 - ad / r; al = .06 + t * t * .9; rr = pr * (.3 + t * 1.2) } }
+                    if (hf) { const df = i - fi, ad = Math.abs(df); if (df > 0) { al = .15; rr = pr * .4 } else if (ad > r) { al = .15; rr = pr * .4 } else { const t = 1 - ad / r; al = .15 + t * t * .85; rr = pr * (.4 + t * 1.1) } }
                     else { al = .85; rr = pr }
                     if (al < .01) continue;
                     const c = gcs(i);
